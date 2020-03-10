@@ -6,7 +6,7 @@ from odoo.tools import safe_eval
 
 
 class MassMailingList(models.Model):
-    _inherit = "mail.mass_mailing.list"
+    _inherit = "mailing.list"
 
     dynamic = fields.Boolean(
         help="Set this list as dynamic, to make it autosynchronized with "
@@ -31,7 +31,7 @@ class MassMailingList(models.Model):
 
     def action_sync(self):
         """Sync contacts in dynamic lists."""
-        Contact = self.env["mail.mass_mailing.contact"].with_context(syncing=True)
+        Contact = self.env["mailing.contact"].with_context(syncing=True)
         Partner = self.env["res.partner"]
         # Skip non-dynamic lists
         dynamic = self.filtered("dynamic").with_context(syncing=True)
@@ -47,7 +47,7 @@ class MassMailingList(models.Model):
                 contact_to_detach.filtered(lambda r: not r.list_ids).unlink()
             # Add new contacts
             current_partners = one.contact_ids.mapped("partner_id")
-            contact_to_list = self.env["mail.mass_mailing.contact"]
+            contact_to_list = self.env["mailing.contact"]
             vals_list = []
             for partner in desired_partners - current_partners:
                 contacts_in_partner = partner.mass_mailing_contact_ids

@@ -4,9 +4,9 @@
 from odoo import fields, models
 
 
-class MassMailingLoadFilter(models.TransientModel):
-    _name = "mail.mass_mailing.load.filter"
-    _description = "Mail Mass Mailing Load Filter"
+class MailingLoadFilter(models.TransientModel):
+    _name = "mailing.load.filter"
+    _description = "Mass Mailing Load Filter"
 
     filter_id = fields.Many2one(
         comodel_name="ir.filters",
@@ -19,7 +19,5 @@ class MassMailingLoadFilter(models.TransientModel):
 
     def load_filter(self):
         self.ensure_one()
-        mass_list = self.env["mail.mass_mailing.list"].browse(
-            self.env.context["active_id"]
-        )
+        mass_list = self.env["mailing.list"].browse(self.env.context["active_id"])
         mass_list.sync_domain = self.filter_id.domain

@@ -5,9 +5,9 @@ from odoo import models
 
 
 class MassMailing(models.Model):
-    _inherit = "mail.mass_mailing"
+    _inherit = "mailing.mailing"
 
-    def send_mail(self):
+    def action_send_mail(self):
         """Sync dynamic lists before sending mailings to them."""
         self.contact_list_ids.action_sync()
-        return super().send_mail()
+        return super().action_send_mail()
