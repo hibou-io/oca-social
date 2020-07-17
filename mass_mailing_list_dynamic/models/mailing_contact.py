@@ -1,5 +1,6 @@
 # Copyright 2017 Tecnativa - Jairo Llopis
 # Copyright 2019 Tecnativa - Victor M.M. Torres
+# Copyright 2020 Hibou Corp. - Jared Kipe
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, models
